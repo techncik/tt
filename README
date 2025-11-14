@@ -1,1 +1,46 @@
 To run, cd into cli_tool, then run 'python cli.py {input}'
+
+Progress.
+
+Today I scrapped together a main.py to get a Flask server running and get the Authentication working.
+
+So I currently have a auth_token working.
+access_token line 63 of main.py
+
+To run it, I cd into cli_tool.
+Then run python core/main.py
+This opens the Grant Access web page
+
+Then after granting access, I return the access token
+
+
+The problems I face at the moment...
+
+1 I need to figure out how to get this logic back into my original flow.
+Ideally when you start the program, this code runs.
+
+2 I need to get access_token into my cli.py flow. I can possibly save it as an
+env variable. Then all the different branches of logic would just make a API 
+call to //api.spotify.com/..., and use the Access token as the Authenication
+Bearer token.
+
+I think I to first figure out this flow. I believe once I have the access_token
+where I need it, and the flow of the program working well, then I will
+just need to update my search and current logic to make the relavent requests.
+
+eg Pause just needs to call 
+"https://api.spotify.com/v1/me/player/pause"
+with the Header
+'Authorization': f"Bearer {ENV.access_token}"
+
+or whatever this will look like. 
+
+
+I feel like I am so close now. All the API endpoints exist already, I just
+need to position my code to be able to call these.
+
+
+So tomorrow, focus on (in order):
+- App setup. Starting app will call main, then anything else will occur in terminal with cli.py
+- Getting access_token into envs (for now. Probably not safe or anything, but will work for now)
+- Plugging in Spotify APIS.

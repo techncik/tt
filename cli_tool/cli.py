@@ -1,6 +1,7 @@
 import click
 from core.current import current
 from core.search import search
+from core.access import get_auth
 
 MODES = ['s', 'c']
 
@@ -19,9 +20,6 @@ SOPTS = ['a', 'p', 'r', 'q', 's', '.', 'm']
 @click.argument('opts', nargs=1)
 @click.argument('inp', nargs=-1)
 def main(mode: str, opts: str, inp: tuple[str]):
-
-    # Uncomment to convert tuple input into a string. Depends on how API works
-    #inp = ' '.join(inp)
 
     # Mode is c or s
     if not mode in MODES:
