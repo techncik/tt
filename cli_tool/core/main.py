@@ -19,9 +19,6 @@ REDIRECT_URI = "http://127.0.0.1:5000/callback"   # Need to change this eventual
 client_id = os.getenv("CLIENT_ID")
 client_secret = os.getenv("CLIENT_SECRET")
 
-# client_id = "358d6bfc23404aa0975656e137036428"
-# client_secret = "ea93dbfe89a9409b891c2118e4b57134"
-
 @app.route('/')
 def index():
     
