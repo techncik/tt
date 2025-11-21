@@ -3,8 +3,7 @@ from flask import Flask, jsonify, redirect, request
 import requests
 import urllib.parse
 import os
-from dotenv import load_dotenv
-
+from dotenv import load_dotenv, set_key
 
 app = Flask(__name__)
 app.secret_key = 'abc123'
@@ -61,17 +60,20 @@ def callback():
         refresh_token = token_info['refresh_token']
         expires_in = token_info['expires_in']
 
+        # url = "https://api.spotify.com/v1/me/player/pause"
+        # header = {
+        #     'Authorization': f"Bearer {access_token}",
+        # }
 
-        # Testing pausing the device. I think this fails because I am using
-        # spotify from my Desktop, not wsl
-        url = "https://api.spotify.com/v1/me/player/pause"
-        header = {
-            'Authorization': f"Bearer {access_token}",
-        }
+        # pause_resp = requests.put(url, headers=header)
 
-        pause_resp = requests.put(url, headers=header)
+        # Set environment variable to access_token
 
-        print(pause_resp)
+        # IMPORTANT. This line did not work as expected. Created new .env
+        # file in core layer. Bad
+        
+        #set_key(".env", "ACCESS_TOKEN", access_token)
+        
         
         return access_token
     
@@ -80,4 +82,10 @@ def success():
     return "Logged in"
 
 if __name__ == '__main__':
+
+    # Set up flask server to get access token
     app.run(host='0.0.0.0', debug=True)
+
+
+# Current code creates a new .env file in the /core layer, and then writes to it.
+# Need to instead write to the global .env layer
